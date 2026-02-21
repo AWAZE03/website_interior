@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRK INTERIOR | Premium Wall & Ceiling Designs</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        srk: {
+                            dark: '#111111',
+                            light: '#F8F8F8',
+                            wood: '#A06B3E',
+                            woodDark: '#5E3A1A',
+                            gold: '#D4AF37',
+                            marble: '#EAEAEA'
+                        }
+                    },
+                    backgroundImage: {
+                        'wood-pattern': "url('https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?q=80&w=2070&auto=format&fit=crop')",
+                        'marble-pattern': "url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop')"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        body {
+            background-color: #F8F8F8;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(248, 248, 248, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+        }
+
+        .panel-shadow {
+            box-shadow: 20px 20px 60px #d3d3d3, -20px -20px 60px #ffffff;
+        }
+
+        /* Ambient Glow mimicking the showroom lighting */
+        .ambient-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Image Masking for Aesthetics */
+        .img-mask {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-srk-wood selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
+            <div class="text-2xl font-serif font-bold tracking-wider flex items-center gap-2">
+                <img src="pictures/logo.png" alt="Logo" class="w-15 h-8">
+                SRK <span class="text-srk-wood">INTERIOR</span>
+            </div>
+
+            <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
+                <a href="#home" class="hover:text-srk-wood transition-colors">HOME</a>
+                <a href="#collections" class="hover:text-srk-wood transition-colors">COLLECTIONS</a>
+                <a href="#showroom" class="hover:text-srk-wood transition-colors">SHOWROOM</a>
+                <a href="#contact" class="hover:text-srk-wood transition-colors">CONTACT</a>
+            </div>
+
+            <button
+                class="hidden md:block px-6 py-2.5 bg-srk-dark text-white text-sm font-medium tracking-wide hover:bg-srk-wood transition-colors rounded-none">
+                GET A QUOTE
+            </button>
+
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-srk-dark">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
+        <div class="ambient-glow top-20 left-10"></div>
+        <div class="ambient-glow bottom-20 right-10"
+            style="background: radial-gradient(circle, rgba(160,107,62,0.15) 0%, rgba(255,255,255,0) 70%);"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <!-- Text Content -->
+            <div class="hero-content">
+                <span
+                    class="block text-sm font-semibold tracking-[0.2em] text-srk-wood mb-4 uppercase g-fade-up">Premium
+                    Materials & Finishes</span>
+                <h1 class="text-5xl lg:text-7xl font-serif leading-[1.1] mb-6 g-fade-up">
+                    Elevate Your <br>
+                    <span class="italic text-srk-woodDark">Space</span> Today.
+                </h1>
+                <p class="text-gray-600 max-w-md mb-8 leading-relaxed font-light g-fade-up">
+                    Discover an exclusive range of fluted panels, marble-finish sheets, wooden louvers, and aesthetic
+                    ceiling solutions to transform your interiors.
+                </p>
+                <div class="flex gap-4 g-fade-up">
+                    <a href="#collections"
+                        class="px-8 py-4 bg-srk-dark text-white font-medium hover:bg-srk-wood transition-colors flex items-center gap-2">
+                        Explore Collection <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-6 mt-16 pt-8 border-t border-gray-200 g-fade-up">
+                    <div>
+                        <h4 class="text-2xl font-serif font-bold text-srk-dark">50+</h4>
+                        <p class="text-xs text-gray-500 tracking-wider uppercase mt-1">Design Options</p>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-serif font-bold text-srk-dark">Premium</h4>
+                        <p class="text-xs text-gray-500 tracking-wider uppercase mt-1">Quality Grade</p>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-serif font-bold text-srk-dark">Expert</h4>
+                        <p class="text-xs text-gray-500 tracking-wider uppercase mt-1">Installation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Image / Composition -->
+            <div class="relative h-[600px] w-full hero-image-container group">
+                <!-- Using an Unsplash placeholder that matches the vibe of the uploaded interior photo -->
+                <img src="pictures/1.png"
+                    onerror="this.src='https: //images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop'"
+                    alt="SRK Interior Showroom"
+                    class="absolute inset-0 w-full h-full object-cover rounded-sm img-mask transition-transform duration-700 group-hover:scale-105"
+                    style="transform-origin: center;">
+
+                <!-- Decorative Frame -->
+                <div class="absolute inset-0 border border-white/20 m-6 pointer-events-none z-10"></div>
+
+                <!-- Floating Element mimicking paneling -->
+                <div class="absolute -bottom-10 -left-10 bg-white p-6 shadow-xl w-64 floating-card z-20">
+                    <div class="flex gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-srk-wood"></div>
+                        <div class="w-8 h-8 rounded-full bg-srk-dark"></div>
+                        <div class="w-8 h-8 rounded-full bg-gray-300"></div>
+                    </div>
+                    <p class="text-sm font-medium text-gray-800">Endless Textures</p>
+                    <p class="text-xs text-gray-500">Customizable for your walls & ceilings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories / Collections -->
+    <section id="collections" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 scroll-anim">
+                <div class="max-w-2xl">
+                    <span class="text-srk-wood font-semibold tracking-widest text-sm uppercase mb-3 block">Our
+                        Inventory</span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-srk-dark leading-tight">Masterpieces for<br>Every
+                        Surface.</h2>
+                </div>
+                <p class="text-gray-500 max-w-xs mt-6 md:mt-0 font-light text-sm">
+                    From fluted wooden panels to high-gloss marble finish sheets, find exactly what you need.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <!-- Category 1 -->
+
+                <div class="group cursor-pointer scroll-anim collection-card">
+                    <div class="relative h-96 overflow-hidden rounded-sm mb-6 bg-srk-dark">
+                        <img src="pictures/2.png" alt="Fluted Louver TV Panels"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500">
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif font-semibold mb-2 group-hover:text-srk-wood transition-colors">Fluted
+                        Louver TV Panels</h3>
+                    <p class="text-sm text-gray-500">Add depth and warmth to living room walls and TV units.</p>
+                </div>
+
+                <!-- Category 2 -->
+
+                <div class="group cursor-pointer scroll-anim collection-card" style="transition-delay: 100ms;">
+                    <div class="relative h-96 overflow-hidden rounded-sm mb-6 bg-srk-dark">
+                        <img src="pictures/3.png" alt=" Glass Finish Sheets"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500">
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif font-semibold mb-2 group-hover:text-srk-wood transition-colors">Glass
+                        Finish Sheets</h3>
+                    <p class="text-sm text-gray-500">Luxurious high-gloss finishes for ceilings and premium accent
+                        walls.</p>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="group cursor-pointer scroll-anim collection-card" style="transition-delay: 200ms;">
+                    <div class="relative h-96 overflow-hidden rounded-sm mb-6 bg-srk-dark">
+                        <img src="pictures/4.png" alt="Ceiling & Lighting Integrations"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500">
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif font-semibold mb-2 group-hover:text-srk-wood transition-colors">
+                        Ceiling & Lighting Integrations</h3>
+                    <p class="text-sm text-gray-500">Seamless integration of modern strip lights with false ceilings.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showroom Display Section (Dark Theme) -->
+    <section id="showroom" class="py-24 bg-srk-dark text-white relative overflow-hidden">
+        <!-- Decorative Text Background -->
+        <div
+            class="absolute top-10 left-0 whitespace-nowrap text-[15vw] font-serif font-bold text-outline opacity-5 pointer-events-none select-none">
+            SRK INTERIOR
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Images Matrix -->
+                <div class="grid grid-cols-2 gap-4 showroom-matrix">
+                    <div class="space-y-4 pt-12">
+                        <div class="h-64 bg-gray-800 rounded-sm overflow-hidden image-reveal">
+                            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1000&auto=format&fit=crop"
+                                class="w-full h-full object-cover" alt="Texture 1">
+                        </div>
+                        <div class="h-48 bg-gray-700 rounded-sm overflow-hidden image-reveal">
+                            <div
+                                class="w-full h-full bg-srk-woodDark bg-opacity-80 flex items-center justify-center p-4 text-center">
+                                <p class="font-serif italic text-sm text-srk-gold">"Quality is not an act, it is a
+                                    habit."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="h-48 bg-gray-700 rounded-sm overflow-hidden image-reveal">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop"
+                                class="w-full h-full object-cover" alt="Texture 2">
+                        </div>
+                        <div class="h-64 bg-gray-800 rounded-sm overflow-hidden image-reveal">
+                            <img src="pictures/5.jpg" class="w-full h-full object-cover" alt="Texture 3">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="showroom-content">
+                    <h2 class="text-4xl md:text-5xl font-serif leading-tight mb-6">Experience the showroom aesthetics in
+                        real life.</h2>
+                    <p class="text-gray-400 mb-8 font-light leading-relaxed">
+                        Our physical store offers a massive gallery of textures, from high-density PVC fluted panels to
+                        UV-coated marble sheets. Feel the textures, observe the light reflections, and choose the
+                        perfect combination for your architecture.
+                    </p>
+
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <div class="w-5 h-5 rounded-full bg-srk-gold/20 flex items-center justify-center">
+                                <i data-lucide="check" class="w-3 h-3 text-srk-gold"></i>
+                            </div>
+                            Hundreds of physical samples available
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <div class="w-5 h-5 rounded-full bg-srk-gold/20 flex items-center justify-center">
+                                <i data-lucide="check" class="w-3 h-3 text-srk-gold"></i>
+                            </div>
+                            Custom sizing and cutting services
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <div class="w-5 h-5 rounded-full bg-srk-gold/20 flex items-center justify-center">
+                                <i data-lucide="check" class="w-3 h-3 text-srk-gold"></i>
+                            </div>
+                            Expert consultation for color matching
+                        </li>
+                    </ul>
+
+                    <button
+                        class="px-8 py-4 bg-white text-srk-dark font-medium hover:bg-srk-gold hover:text-white transition-all duration-300">
+                        Visit Our Store
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrolling Text Marquee -->
+    <div class="bg-srk-wood py-4 overflow-hidden flex whitespace-nowrap border-y border-srk-woodDark">
+        <div
+            class="marquee-content flex gap-12 items-center text-white/90 font-serif text-xl tracking-widest uppercase">
+            <span>SRK Interior</span> <span>•</span>
+            <span>Premium Fluted Panels</span> <span>•</span>
+            <span>UV Marble Sheets</span> <span>•</span>
+            <span>Wooden Louvers</span> <span>•</span>
+            <span>False Ceilings</span> <span>•</span>
+            <span>Ambient Lighting</span> <span>•</span>
+            <!-- Duplicate for infinite scroll effect -->
+            <span>SRK Interior</span> <span>•</span>
+            <span>Premium Fluted Panels</span> <span>•</span>
+            <span>UV Marble Sheets</span> <span>•</span>
+            <span>Wooden Louvers</span> <span>•</span>
+            <span>False Ceilings</span> <span>•</span>
+            <span>Ambient Lighting</span> <span>•</span>
+        </div>
+    </div>
+
+    <!-- Contact CTA Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center scroll-anim">
+            <i data-lucide="map-pin" class="w-10 h-10 mx-auto text-srk-wood mb-6"></i>
+            <h2 class="text-4xl font-serif text-srk-dark mb-6">Ready to upgrade your interior?</h2>
+            <p class="text-gray-500 mb-10 max-w-xl mx-auto font-light">
+                Drop by our showroom or give us a call. Let our experts guide you through the best materials and designs
+                for your specific requirements.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#"
+                    class="px-8 py-4 bg-srk-dark text-white font-medium hover:bg-srk-wood transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="phone" class="w-4 h-4"></i> Call Us Now
+                </a>
+                <a href="#"
+                    class="px-8 py-4 border border-gray-300 text-srk-dark font-medium hover:border-srk-dark transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Send an Inquiry
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-srk-dark text-white/70 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-3 gap-12 items-center">
+            <div>
+                <div class="text-2xl font-serif font-bold tracking-wider flex items-center gap-2 text-white mb-4">
+                    <img src="pictures/logo.png" alt="SRK Interior" class="h-8 w-auto">
+                    SRK <span class="text-srk-wood">INTERIOR</span>
+                </div>
+                <p class="text-sm max-w-xs font-light">Transforming ordinary spaces into extraordinary environments with
+                    premium interior materials.</p>
+            </div>
+
+            <div class="flex flex-col gap-2 text-sm font-light md:text-center">
+                <a href="#home" class="hover:text-white transition-colors">Home</a>
+                <a href="#collections" class="hover:text-white transition-colors">Collections</a>
+                <a href="#showroom" class="hover:text-white transition-colors">Showroom</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </div>
+
+            <div class="md:text-right">
+                <p class="text-sm font-light mb-4">Follow us for inspiration</p>
+                <div class="flex gap-4 md:justify-end">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-srk-wood hover:text-white transition-colors">
+                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-srk-wood hover:text-white transition-colors">
+                        <i data-lucide="facebook" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-srk-wood hover:text-white transition-colors">
+                        <i data-lucide="twitter" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-12 pt-8 border-t border-white/10 text-xs text-center font-light">
+            &copy; 2024 SRK Interior. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Animations & Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Wait for DOM
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // --- HERO ANIMATIONS ---
+            const heroTimeline = gsap.timeline();
+
+            // Image Reveal
+            heroTimeline.fromTo(".img-mask",
+                { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", scale: 1.1 },
+                { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)", scale: 1, duration: 1.5, ease: "power4.inOut" }
+            );
+
+            // Text Stagger
+            heroTimeline.fromTo(".g-fade-up",
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out" },
+                "-=0.8"
+            );
+
+            // Floating Card
+            heroTimeline.fromTo(".floating-card",
+                { y: 50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: "back.out(1.7)" },
+                "-=0.5"
+            );
+
+            // Floating animation loop
+            gsap.to(".floating-card", {
+                y: -15,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+
+            // --- SCROLL ANIMATIONS ---
+
+            // Generic Fade Up for sections
+            gsap.utils.toArray('.scroll-anim').forEach(element => {
+                gsap.fromTo(element,
+                    { y: 50, opacity: 0 },
+                    {
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        },
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        ease: "power3.out"
+                    }
+                );
+            });
+
+            // Showroom Matrix Reveal
+            gsap.utils.toArray('.image-reveal').forEach((element, i) => {
+                gsap.fromTo(element,
+                    { scale: 0.8, opacity: 0, rotation: i % 2 === 0 ? -5 : 5 },
+                    {
+                        scrollTrigger: {
+                            trigger: ".showroom-matrix",
+                            start: "top 80%",
+                        },
+                        scale: 1,
+                        opacity: 1,
+                        rotation: 0,
+                        duration: 1,
+                        delay: i * 0.15,
+                        ease: "back.out(1.2)"
+                    }
+                );
+            });
+
+            // Marquee Infinite Scroll
+            gsap.to(".marquee-content", {
+                xPercent: -50,
+                ease: "none",
+                duration: 15,
+                repeat: -1
+            });
+
+            // Navbar Blur on Scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    nav.classList.add('shadow-sm');
+                    nav.style.background = 'rgba(248, 248, 248, 0.95)';
+                } else {
+                    nav.classList.remove('shadow-sm');
+                    nav.style.background = 'rgba(248, 248, 248, 0.85)';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
