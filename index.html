@@ -99,42 +99,50 @@
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         }
 
-        /* ─── Custom Cursor ─────────────────────────────────────────── */
-        * { cursor: none !important; }
-
-        #cursor-dot {
-            position: fixed;
-            top: 0; left: 0;
-            width: 8px; height: 8px;
-            background: #D4AF37;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background 0.2s;
+        /* ─── Custom Cursor (Desktop Only) ─────────────────────────── */
+        #cursor-dot, #cursor-ring {
+            display: none;
         }
 
-        #cursor-ring {
-            position: fixed;
-            top: 0; left: 0;
-            width: 36px; height: 36px;
-            border: 1.5px solid rgba(212, 175, 55, 0.75);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99998;
-            transform: translate(-50%, -50%);
-            transition: width 0.35s ease, height 0.35s ease, border-color 0.35s ease;
-            backdrop-filter: invert(5%);
-        }
+        @media (min-width: 1024px) {
+            * { cursor: none !important; }
 
-        /* Hover state — ring expands, dot fills white */
-        body.cursor-hover #cursor-dot {
-            width: 12px; height: 12px;
-            background: #ffffff;
-        }
-        body.cursor-hover #cursor-ring {
-            width: 54px; height: 54px;
-            border-color: rgba(212, 175, 55, 1);
+            #cursor-dot {
+                position: fixed;
+                top: 0; left: 0;
+                width: 8px; height: 8px;
+                background: #D4AF37;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 99999;
+                transform: translate(-50%, -50%);
+                transition: width 0.2s, height 0.2s, background 0.2s;
+                display: block;
+            }
+
+            #cursor-ring {
+                position: fixed;
+                top: 0; left: 0;
+                width: 36px; height: 36px;
+                border: 1.5px solid rgba(212, 175, 55, 0.75);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 99998;
+                transform: translate(-50%, -50%);
+                transition: width 0.35s ease, height 0.35s ease, border-color 0.35s ease;
+                backdrop-filter: invert(5%);
+                display: block;
+            }
+
+            /* Hover state — ring expands, dot fills white */
+            body.cursor-hover #cursor-dot {
+                width: 12px; height: 12px;
+                background: #ffffff;
+            }
+            body.cursor-hover #cursor-ring {
+                width: 54px; height: 54px;
+                border-color: rgba(212, 175, 55, 1);
+            }
         }
         /* ─── Before/After Slider ───────────────────────────────────── */
         .comparison-slider {
@@ -194,9 +202,9 @@
 
     <!-- Navigation -->
     <nav class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
-            <div class="text-2xl font-serif font-bold tracking-wider flex items-center gap-2">
-                <img src="pictures/logo.png" alt="Logo" class="w-15 h-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center relative">
+            <div class="text-2xl font-serif font-bold tracking-wider flex items-center gap-2 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+                <img src="pictures/logo.png" alt="Logo" class="w-auto h-8">
                 SRK <span class="text-srk-wood">INTERIOR</span>
             </div>
 
@@ -207,17 +215,37 @@
                 <a href="#contact" class="hover:text-srk-wood transition-colors">CONTACT</a>
             </div>
 
-            <button
+            <a href="https://wa.me/1234567890?text=Hi,%20I%20would%20like%20to%20get%20a%20quote%20for%20my%20interior%20space." target="_blank" rel="noopener noreferrer"
                 class="hidden md:block px-6 py-2.5 bg-srk-dark text-white text-sm font-medium tracking-wide hover:bg-srk-wood transition-colors rounded-none">
                 GET A QUOTE
-            </button>
+            </a>
 
             <!-- Mobile Menu Icon -->
-            <button class="md:hidden text-srk-dark">
+            <button class="md:hidden text-srk-dark ml-auto" id="mobile-menu-btn" onclick="toggleMobileMenu(true)">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500 md:hidden">
+        <button onclick="toggleMobileMenu(false)" class="absolute top-6 right-6 text-srk-dark">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <div id="mobile-menu-logo" class="flex flex-col items-center gap-2 mb-8 opacity-0">
+            <img src="pictures/logo.png" alt="Logo" class="h-10 w-auto">
+            <div class="text-2xl font-serif font-bold tracking-wider">
+                SRK <span class="text-srk-wood">INTERIOR</span>
+            </div>
+        </div>
+        <a href="#home" onclick="toggleMobileMenu(false)" class="mobile-link opacity-0 text-2xl font-serif hover:text-srk-wood">HOME</a>
+        <a href="#collections" onclick="toggleMobileMenu(false)" class="mobile-link opacity-0 text-2xl font-serif hover:text-srk-wood">COLLECTIONS</a>
+        <a href="#showroom" onclick="toggleMobileMenu(false)" class="mobile-link opacity-0 text-2xl font-serif hover:text-srk-wood">SHOWROOM</a>
+        <a href="#contact" onclick="toggleMobileMenu(false)" class="mobile-link opacity-0 text-2xl font-serif hover:text-srk-wood">CONTACT</a>
+        <a href="https://wa.me/1234567890?text=Hi,%20I%20would%20like%20to%20get%20a%20quote%20for%20my%20interior%20space." target="_blank" rel="noopener noreferrer" class="mobile-btn opacity-0 mt-4 px-10 py-4 bg-srk-dark text-white text-sm font-medium tracking-widest hover:bg-srk-wood transition-colors text-center inline-block">
+            GET A QUOTE
+        </a>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
@@ -268,7 +296,7 @@
                 <!-- Using an Unsplash placeholder that matches the vibe of the uploaded interior photo -->
                 <img src="pictures/1.png"
                     onerror="this.src='https: //images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop'"
-                    alt="SRK Interior Showroom"
+                    alt="SRK INTERIOR Showroom"
                     class="absolute inset-0 w-full h-full object-cover rounded-sm img-mask transition-transform duration-700 group-hover:scale-105"
                     style="transform-origin: center;">
 
@@ -481,14 +509,14 @@
     <div class="bg-srk-wood py-4 overflow-hidden flex whitespace-nowrap border-y border-srk-woodDark">
         <div
             class="marquee-content flex gap-12 items-center text-white/90 font-serif text-xl tracking-widest uppercase">
-            <span>SRK Interior</span> <span>•</span>
+            <span>SRK INTERIOR</span> <span>•</span>
             <span>Premium Fluted Panels</span> <span>•</span>
             <span>UV Marble Sheets</span> <span>•</span>
             <span>Wooden Louvers</span> <span>•</span>
             <span>False Ceilings</span> <span>•</span>
             <span>Ambient Lighting</span> <span>•</span>
             <!-- Duplicate for infinite scroll effect -->
-            <span>SRK Interior</span> <span>•</span>
+            <span>SRK INTERIOR</span> <span>•</span>
             <span>Premium Fluted Panels</span> <span>•</span>
             <span>UV Marble Sheets</span> <span>•</span>
             <span>Wooden Louvers</span> <span>•</span>
@@ -527,47 +555,117 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-srk-dark text-white/70 py-12 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-3 gap-12 items-center">
-            <div>
-                <div class="text-2xl font-serif font-bold tracking-wider flex items-center gap-2 text-white mb-4">
-                    <img src="pictures/logo.png" alt="SRK Interior" class="h-8 w-auto">
-                    SRK <span class="text-srk-wood">INTERIOR</span>
+    <footer class="relative bg-srk-dark text-white/70 pt-32 pb-12 overflow-hidden border-t border-white/5">
+        <!-- Ambient Glow Elements -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-srk-wood/20 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-srk-gold/10 rounded-full blur-[150px] pointer-events-none -translate-x-1/3 translate-y-1/3"></div>
+        
+        <!-- Large Statement -->
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 mb-24 relative z-10 text-center md:text-left scroll-anim">
+            <h2 class="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-6 leading-[1.1]">Let's craft <br><span class="text-srk-wood italic pr-4">brilliance.</span></h2>
+            <p class="font-light max-w-xl text-lg text-white/50">Your space deserves the extraordinary. Connect with us to begin your journey toward unparalleled interior aesthetics.</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-16 relative z-10 scroll-anim">
+            <!-- Brand Column -->
+            <div class="md:col-span-5">
+                <div class="text-3xl md:text-6xl font-serif font-bold tracking-wider flex items-center justify-center md:justify-start gap-4 text-white mb-6 hover:scale-105 transition-transform origin-left w-fit cursor-pointer">
+                    <img src="pictures/logo.png" alt="SRK INTERIOR" class="h-12 md:h-20 w-auto filter drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                    <div>
+                        SRK <span class="text-srk-wood block text-sm md:text-xl tracking-[0.3em] font-sans mt-1">INTERIOR</span>
+                    </div>
                 </div>
-                <p class="text-sm max-w-xs font-light">Transforming ordinary spaces into extraordinary environments with
-                    premium interior materials.</p>
+                <p class="text-sm md:text-xl max-w-sm md:max-w-lg font-light leading-relaxed mx-auto md:mx-0 text-center md:text-left text-white/60">
+                    Transforming standard architecture into masterpieces. We source and install the finest panels, louvers, and sheets for your visionary projects.
+                </p>
             </div>
 
-            <div class="flex flex-col gap-2 text-sm font-light md:text-center">
-                <a href="#home" class="hover:text-white transition-colors">Home</a>
-                <a href="#collections" class="hover:text-white transition-colors">Collections</a>
-                <a href="#showroom" class="hover:text-white transition-colors">Showroom</a>
-                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            <!-- Quick Links -->
+            <div class="md:col-span-3 md:col-start-8 flex flex-col gap-4 text-sm md:text-xl font-light text-center md:text-left">
+                <h4 class="text-white font-medium tracking-widest uppercase mb-4 text-xs md:text-base">Explore</h4>
+                <a href="#home" class="hover:text-srk-wood transition-colors w-fit mx-auto md:mx-0 group flex items-center gap-3">
+                    <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Home
+                </a>
+                <a href="#collections" class="hover:text-srk-wood transition-colors w-fit mx-auto md:mx-0 group flex items-center gap-3">
+                     <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Collections
+                </a>
+                <a href="#showroom" class="hover:text-srk-wood transition-colors w-fit mx-auto md:mx-0 group flex items-center gap-3">
+                     <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Showroom
+                </a>
+                <a href="#contact" class="hover:text-srk-wood transition-colors w-fit mx-auto md:mx-0 group flex items-center gap-3">
+                     <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Contact
+                </a>
             </div>
 
-            <div class="md:text-right">
-                <p class="text-sm font-light mb-4">Follow us for inspiration</p>
-                <div class="flex gap-4 md:justify-end">
-                    <!-- INSTAGRAM LINK -->
-                    <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener noreferrer"
-                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-srk-wood hover:text-white transition-colors">
-                        <i data-lucide="instagram" class="w-4 h-4"></i>
+            <!-- Socials -->
+            <div class="md:col-span-2 text-center md:text-left">
+                <h4 class="text-white font-medium tracking-widest uppercase mb-6 text-xs md:text-base">Connect</h4>
+                <div class="flex gap-4 justify-center md:justify-start">
+                    <a href="#" target="_blank" rel="noopener noreferrer"
+                        class="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-srk-wood hover:border-srk-wood text-white transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(160,107,62,0.2)]">
+                        <i data-lucide="instagram" class="w-5 h-5 md:w-6 md:h-6"></i>
                     </a>
                     <a href="#"
-                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-srk-wood hover:text-white transition-colors">
-                        <i data-lucide="facebook" class="w-4 h-4"></i>
-                    </a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-srk-wood hover:text-white transition-colors">
-                        <i data-lucide="twitter" class="w-4 h-4"></i>
+                        class="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-srk-wood hover:border-srk-wood text-white transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(160,107,62,0.2)]">
+                        <i data-lucide="facebook" class="w-5 h-5 md:w-6 md:h-6"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-12 pt-8 border-t border-white/10 text-xs text-center font-light">
-            &copy; 2026 SRK Interior. All rights reserved.
+
+        <!-- Branding & Legal -->
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-32 relative z-20 flex flex-col md:flex-row justify-between items-center border-t border-white/20 pt-10">
+            <div class="text-sm text-gray-400 font-light mb-4 md:mb-0">
+                &copy; 2026 SRK INTERIOR. All rights reserved.
+            </div>
+            <div class="text-sm text-gray-400 font-light flex gap-8">
+                <button onclick="openModal('privacy-modal')" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full font-medium">Privacy Policy</button>
+                <button onclick="openModal('terms-modal')" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full font-medium">Terms of Service</button>
+            </div>
+        </div>
+        
+        <!-- Massive Background Element -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center opacity-[0.03] pointer-events-none select-none z-0 w-full pb-4">
+            <img src="pictures/logo.png" alt="SRK INTERIOR Logo" class="h-auto w-[40vw] max-w-[400px] mb-2 object-contain">
+            <div class="text-[12vw] font-serif font-bold leading-none whitespace-nowrap">
+                SRK <span class="text-srk-wood">INTERIOR</span>
+            </div>
         </div>
     </footer>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+        <div class="bg-white max-w-2xl w-full max-h-[80vh] overflow-y-auto rounded-sm p-8 relative scroll-anim">
+            <button onclick="closeModal('privacy-modal')" class="absolute top-4 right-4 text-srk-dark">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h2 class="text-3xl font-serif mb-6 text-srk-dark">Privacy Policy</h2>
+            <div class="space-y-4 text-gray-600 font-light leading-relaxed">
+                <p><strong>1. Information Collection:</strong> At SRK INTERIOR, we collect basic information like name and phone number only when you voluntarily provide it for a quote or inquiry.</p>
+                <p><strong>2. Usage:</strong> This data is used solely to respond to your inquiries and provide our interior design services. We may use your contact details to update you on your project status.</p>
+                <p><strong>3. Protection:</strong> We implement security measures to maintain the safety of your personal information. We do not sell, trade, or otherwise transfer your data to outside parties.</p>
+                <p><strong>4. Cookies:</strong> Our website may use cookies to enhance your browsing experience. You can choose to disable cookies in your browser settings.</p>
+                <p><strong>5. Consent:</strong> By using our site, you consent to our website's privacy policy.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="terms-modal" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+        <div class="bg-white max-w-2xl w-full max-h-[80vh] overflow-y-auto rounded-sm p-8 relative scroll-anim">
+            <button onclick="closeModal('terms-modal')" class="absolute top-4 right-4 text-srk-dark">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h2 class="text-3xl font-serif mb-6 text-srk-dark">Terms of Service</h2>
+            <div class="space-y-4 text-gray-600 font-light leading-relaxed">
+                <p><strong>1. Services:</strong> SRK INTERIOR provides premium wall and ceiling design solutions, including fluted panels, marble sheets, and louver installation.</p>
+                <p><strong>2. Quotations:</strong> All quotes provided are estimates. Final pricing is subject to site measurements, material costs, and customization requirements.</p>
+                <p><strong>3. Intellectual Property:</strong> All content on this site, including images and text, is the property of SRK INTERIOR and may not be used without permission.</p>
+                <p><strong>4. Liability:</strong> SRK INTERIOR is not liable for indirect or consequential losses resulting from the use of our services or potential project delays beyond our control.</p>
+                <p><strong>5. Governing Law:</strong> These terms are governed by the laws applicable in our showroom's local jurisdiction.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Animations & Logic -->
     <script>
@@ -632,8 +730,8 @@
                     {
                         scrollTrigger: {
                             trigger: element,
-                            start: "top 80%",
-                            toggleActions: "play none none reverse"
+                            start: "top 85%",
+                            toggleActions: "play reverse play reverse"
                         },
                         y: 0,
                         opacity: 1,
@@ -653,6 +751,7 @@
                         scrollTrigger: {
                             trigger: ".showroom-matrix",
                             start: "top 75%",
+                            toggleActions: "play reverse play reverse"
                         },
                         x: 0,
                         y: 0,
@@ -754,15 +853,18 @@
 
         // ─── Custom Cursor Logic ──────────────────────────────────────
         (function () {
+            // Only initialize on desktop
+            if (window.innerWidth < 1024) return;
+
             const dot  = document.getElementById('cursor-dot');
             const ring = document.getElementById('cursor-ring');
+            if (!dot || !ring) return;
 
             let mouseX = window.innerWidth  / 2;
             let mouseY = window.innerHeight / 2;
             let ringX  = mouseX;
             let ringY  = mouseY;
 
-            // Move the dot instantly
             document.addEventListener('mousemove', e => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
@@ -770,7 +872,6 @@
                 dot.style.top  = mouseY + 'px';
             });
 
-            // Smooth-lag ring via requestAnimationFrame
             function animateRing() {
                 ringX += (mouseX - ringX) * 0.12;
                 ringY += (mouseY - ringY) * 0.12;
@@ -780,14 +881,12 @@
             }
             animateRing();
 
-            // Hover detection
             const hoverTargets = 'a, button, [class*="cursor-pointer"], input, select, textarea, label';
             document.querySelectorAll(hoverTargets).forEach(el => {
                 el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
                 el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
             });
 
-            // Hide cursors when mouse leaves window
             document.addEventListener('mouseleave', () => {
                 dot.style.opacity  = '0';
                 ring.style.opacity = '0';
@@ -797,6 +896,77 @@
                 ring.style.opacity = '1';
             });
         })();
+
+        // ─── Mobile Menu Toggle Logic ────────────────────────────────
+        function toggleMobileMenu(open) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                if (open) {
+                    mobileMenu.classList.remove('translate-x-full');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Kill any active GSAP animations inside menu to prevent overlapping
+                    gsap.killTweensOf(['#mobile-menu-logo', '.mobile-link', '.mobile-btn']);
+
+                    // Logo drop-in
+                    gsap.fromTo("#mobile-menu-logo",
+                        { opacity: 0, y: -20, scale: 0.95 },
+                        { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: 0.3, ease: "back.out(1.5)" }
+                    );
+
+                    // Links stagger up
+                    gsap.fromTo(".mobile-link",
+                        { opacity: 0, y: 30 },
+                        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 0.4, ease: "power3.out" }
+                    );
+
+                    // CTA button pop
+                    gsap.fromTo(".mobile-btn",
+                        { opacity: 0, scale: 0.9, y: 20 },
+                        { opacity: 1, scale: 1, y: 0, duration: 0.5, delay: 0.8, ease: "elastic.out(1, 0.7)" }
+                    );
+                } else {
+                    mobileMenu.classList.add('translate-x-full');
+                    document.body.style.overflow = '';
+                    
+                    // Reset elements for next open
+                    gsap.set(['#mobile-menu-logo', '.mobile-link', '.mobile-btn'], { opacity: 0 });
+                }
+            }
+        }
+
+        // ─── Privacy/Terms Modals Logic ──────────────────────────────
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                gsap.fromTo(modal.children[0], 
+                    { scale: 0.9, opacity: 0, y: 20 },
+                    { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+                );
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                gsap.to(modal.children[0], {
+                    scale: 0.9, opacity: 0, y: 20, duration: 0.3, ease: "power2.in",
+                    onComplete: () => {
+                        modal.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        }
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            if (event.target.id === 'privacy-modal' || event.target.id === 'terms-modal') {
+                closeModal(event.target.id);
+            }
+        }
     </script>
 </body>
 
