@@ -320,7 +320,7 @@
     <!-- Categories / Collections -->
     <section id="collections" class="py-24 bg-white relative">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 scroll-anim">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 scroll-anim text-center md:text-left">
                 <div class="max-w-2xl">
                     <span class="text-srk-wood font-semibold tracking-widest text-sm uppercase mb-3 block">Our
                         Inventory</span>
@@ -328,11 +328,11 @@
                         Surface.</h2>
                 </div>
                 <!-- Filter Buttons -->
-                <div class="flex flex-wrap gap-4 mt-8 md:mt-0 font-medium text-xs tracking-widest uppercase filter-btns">
-                    <button data-filter="all" class="px-6 py-2 border-b-2 border-srk-wood text-srk-dark transition-all">ALL</button>
-                    <button data-filter="panels" class="px-6 py-2 border-b-2 border-transparent text-gray-400 hover:text-srk-dark transition-all">PANELS</button>
-                    <button data-filter="sheets" class="px-6 py-2 border-b-2 border-transparent text-gray-400 hover:text-srk-dark transition-all">SHEETS</button>
-                    <button data-filter="ceiling" class="px-6 py-2 border-b-2 border-transparent text-gray-400 hover:text-srk-dark transition-all">CEILING</button>
+                <div class="flex flex-nowrap overflow-x-auto hide-scrollbar w-full md:w-auto gap-4 mt-8 md:mt-0 font-medium text-xs tracking-widest uppercase filter-btns pb-2 md:pb-0">
+                    <button data-filter="all" class="flex-shrink-0 px-6 py-2 border-b-2 border-srk-wood text-srk-dark transition-all">ALL</button>
+                    <button data-filter="panels" class="flex-shrink-0 px-6 py-2 border-b-2 border-transparent text-gray-400 hover:text-srk-dark transition-all">PANELS</button>
+                    <button data-filter="sheets" class="flex-shrink-0 px-6 py-2 border-b-2 border-transparent text-gray-400 hover:text-srk-dark transition-all">SHEETS</button>
+                    <button data-filter="ceiling" class="flex-shrink-0 px-6 py-2 border-b-2 border-transparent text-gray-400 hover:text-srk-dark transition-all">CEILING</button>
                 </div>
             </div>
 
@@ -566,9 +566,9 @@
             <p class="font-light max-w-xl text-lg text-white/50">Your space deserves the extraordinary. Connect with us to begin your journey toward unparalleled interior aesthetics.</p>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-16 relative z-10 scroll-anim">
-            <!-- Brand Column -->
-            <div class="md:col-span-5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:grid md:grid-cols-12 gap-16 relative z-10 scroll-anim">
+            <!-- Brand Column (Desktop Only) -->
+            <div class="hidden md:block md:col-span-5">
                 <div class="text-3xl md:text-6xl font-serif font-bold tracking-wider flex items-center justify-center md:justify-start gap-4 text-white mb-6 hover:scale-105 transition-transform origin-left w-fit cursor-pointer">
                     <img src="pictures/logo.png" alt="SRK INTERIOR" class="h-12 md:h-20 w-auto filter drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
                     <div>
@@ -580,25 +580,27 @@
                 </p>
             </div>
 
-            <!-- Quick Links -->
-            <div class="md:col-span-3 md:col-start-8 flex flex-col gap-4 text-sm md:text-xl font-light text-center md:text-left">
-                <h4 class="text-white font-medium tracking-widest uppercase mb-4 text-xs md:text-base">Explore</h4>
-                <a href="#home" class="hover:text-srk-wood transition-colors w-fit mx-auto md:mx-0 group flex items-center gap-3">
-                    <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Home
-                </a>
-                <a href="#collections" class="hover:text-srk-wood transition-colors w-fit mx-auto md:mx-0 group flex items-center gap-3">
-                     <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Collections
-                </a>
-                <a href="#showroom" class="hover:text-srk-wood transition-colors w-fit mx-auto md:mx-0 group flex items-center gap-3">
-                     <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Showroom
-                </a>
-                <a href="#contact" class="hover:text-srk-wood transition-colors w-fit mx-auto md:mx-0 group flex items-center gap-3">
-                     <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Contact
-                </a>
+            <!-- Quick Links (Explore - Mobile Order 1) -->
+            <div class="md:col-span-3 md:col-start-8 flex flex-col items-center md:items-start text-sm md:text-xl font-light order-1 md:order-none">
+                <h4 class="text-white font-medium tracking-widest uppercase mb-4 md:mb-4 text-xs md:text-base">Explore</h4>
+                <div class="flex flex-col gap-4">
+                    <a href="#home" class="hover:text-srk-wood transition-colors w-fit group flex items-center gap-3">
+                        <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Home
+                    </a>
+                    <a href="#collections" class="hover:text-srk-wood transition-colors w-fit group flex items-center gap-3">
+                         <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Collections
+                    </a>
+                    <a href="#showroom" class="hover:text-srk-wood transition-colors w-fit group flex items-center gap-3">
+                         <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Showroom
+                    </a>
+                    <a href="#contact" class="hover:text-srk-wood transition-colors w-fit group flex items-center gap-3">
+                         <span class="w-0 group-hover:w-6 h-px bg-srk-wood transition-all duration-500"></span> Contact
+                    </a>
+                </div>
             </div>
 
-            <!-- Socials -->
-            <div class="md:col-span-2 text-center md:text-left">
+            <!-- Socials (Connect - Mobile Order 3) -->
+            <div class="md:col-span-2 text-center md:text-left order-3 md:order-none">
                 <h4 class="text-white font-medium tracking-widest uppercase mb-6 text-xs md:text-base">Connect</h4>
                 <div class="flex gap-4 justify-center md:justify-start">
                     <a href="#" target="_blank" rel="noopener noreferrer"
@@ -610,6 +612,15 @@
                         <i data-lucide="facebook" class="w-5 h-5 md:w-6 md:h-6"></i>
                     </a>
                 </div>
+            </div>
+
+            <!-- Mobile Imaginative Logo (Mobile Order 2, Desktop Hidden) -->
+            <div class="md:hidden order-2 flex flex-col items-center justify-center w-full py-8">
+                <img src="pictures/logo.png" alt="SRK INTERIOR Logo" class="h-28 w-auto mb-6 filter drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                <div class="text-5xl font-serif font-bold leading-none whitespace-nowrap text-white text-center">
+                    SRK <span class="text-srk-wood">INTERIOR</span>
+                </div>
+                <div class="w-16 h-px bg-srk-wood mt-6"></div>
             </div>
         </div>
 
@@ -624,8 +635,8 @@
             </div>
         </div>
         
-        <!-- Massive Background Element -->
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center opacity-[0.03] pointer-events-none select-none z-0 w-full pb-4">
+        <!-- Massive Background Element (Desktop Only) -->
+        <div class="hidden md:flex absolute bottom-0 left-1/2 -translate-x-1/2 flex-col items-center justify-center opacity-[0.03] pointer-events-none select-none z-0 w-full pb-4">
             <img src="pictures/logo.png" alt="SRK INTERIOR Logo" class="h-auto w-[40vw] max-w-[400px] mb-2 object-contain">
             <div class="text-[12vw] font-serif font-bold leading-none whitespace-nowrap">
                 SRK <span class="text-srk-wood">INTERIOR</span>
